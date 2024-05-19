@@ -22,7 +22,7 @@ class UsuariController
                 $_SESSION['usuari'] = $username;
                 header("Location: index.php");
             } else {
-                echo "Credenciales incorrectas";
+                echo "Credenciales incorrectas. Verifique todos los datos antes de intentralo otra vez. <a href='index.php?controller=usuari&action=login'>Volver a intentarlo</a>";
             }
         } else {
             include 'view/usuari/login.php';
@@ -39,7 +39,7 @@ class UsuariController
             if ($this->usuariService->register($username, $password, $email, $nom, $cognoms)) {
                 header("Location: index.php?controller=usuari&action=login");
             } else {
-                echo "No se ha podido proceder con el registro. Verifique todos los datos antes de intentralo otra vez.";
+                echo "No se ha podido proceder con el registro. Verifique todos los datos antes de intentralo otra vez. <a href='index.php?controller=usuari&action=register'>Volver al formulario de registro</a>";
             }
         } else {
             include 'view/usuari/register.php';
@@ -47,7 +47,6 @@ class UsuariController
     }
 
     public function logout(){
-        //session_start();
         session_unset();
         session_destroy();
         header("Location: index.php");

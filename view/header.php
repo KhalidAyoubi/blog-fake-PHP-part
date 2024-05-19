@@ -6,6 +6,6 @@
         <a href="index.php?controller=usuari&action=login">Iniciar sesión</a> | <a href="index.php?controller=usuari&action=register">Registrarse</a>
     <?php endif; ?>
     <nav>
-        <a href="index.php?controller=entrada&action=index">Inicio</a>
+        <a href="index.php">Inicio</a>
     </nav>
 </header>
