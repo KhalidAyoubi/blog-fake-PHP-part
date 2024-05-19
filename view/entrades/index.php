@@ -1,3 +1,7 @@
+<?php
+@include ("view/header.php");
+?>
+
 <h1>Mi blog - probando entradas</h1>
 <?php
 if (gettype($entrades) === "string") {

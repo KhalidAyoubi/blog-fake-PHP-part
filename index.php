@@ -2,6 +2,7 @@
 
 use controller\EntradaController;
 use controller\EntradesController;
+use controller\UsuariController;
 
 //require "controller/EntradesController.php";
 
@@ -14,9 +15,9 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 
 
 switch ($controller) {
-    case 'user':
-/*        require 'controllers/UserController.php';
-        $controller = new UserController();*/
+    case 'usuari':
+        require 'controller/UsuariController.php';
+        $controller = new UsuariController();
         break;
     case 'comment':
 /*        require 'controllers/CommentController.php';
