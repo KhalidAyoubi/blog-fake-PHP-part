@@ -99,27 +99,37 @@ class EntradaDao
         }
     }
 
-    public function getEntradaById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM entrada WHERE id = ?");
+    public function getEntradaById($id, $solopublicas) {
+        // Preparamos la consulta SQL según la visibilidad de las entradas
+        $sql = "SELECT * FROM entrada WHERE id = ?";
+        if ($solopublicas) {
+            $sql .= " AND publica = 1";
+        }
+
+        // Preparamos la consulta
+        $stmt = $this->db->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
+
+        // Obtenemos el resultado de la consulta
         $entradaDB = $stmt->get_result()->fetch_assoc();
 
-        //Creamos nuestro propio objeto Entrada y lo devolvemos
+        // Creamos nuestro propio objeto Entrada y lo devolvemos
         $entrada = new Entrada();
 
-        $entrada_has_idioma = $this->getEntradaHasIdioma($entradaDB['id']);
+        // Si se encontró una entrada, asignamos sus valores
+        if ($entradaDB) {
+            // Obtenemos los detalles específicos de la entrada
+            $entrada_has_idioma = $this->getEntradaHasIdioma($entradaDB['id']);
 
-        $entrada->setId($entradaDB['id']);
-        $entrada->setData($entradaDB['data']);
-        $entrada->setPublica($entradaDB['publica']);
-
-        $entrada->setAutor($entradaDB['autor']); //en el controlador hay que sustituirlo por el objeto
-
-        $entrada->setTitol($entrada_has_idioma['titol']);
-        $entrada->setDescripcio($entrada_has_idioma['descripcio']);
-
-        $entrada->setIdidoma($entrada_has_idioma['idioma_ididioma']);
+            $entrada->setId($entradaDB['id']);
+            $entrada->setData($entradaDB['data']);
+            $entrada->setPublica($entradaDB['publica']);
+            $entrada->setAutor($entradaDB['autor']);
+            $entrada->setTitol($entrada_has_idioma['titol']);
+            $entrada->setDescripcio($entrada_has_idioma['descripcio']);
+            $entrada->setIdidoma($entrada_has_idioma['idioma_ididioma']);
+        }
 
         return $entrada;
     }

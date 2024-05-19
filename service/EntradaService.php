@@ -19,8 +19,8 @@ class EntradaService
         return $this->entradaDao->getAllEntradesPubliques();
     }
 
-    public function getPostById($id){
-        return $this->entradaDao->getEntradaById($id);
+    public function getEntradaById($id, $solopublicas){
+        return $this->entradaDao->getEntradaById($id, $solopublicas);
     }
 
 }

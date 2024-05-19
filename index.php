@@ -1,36 +1,42 @@
 <?php
 
+use controller\EntradaController;
 use controller\EntradesController;
 
-require "controller/EntradesController.php";
+//require "controller/EntradesController.php";
 
 session_start();
-/*require 'config/MySQLConfigs.php';
+//require 'config/MySQLConfigs.php';
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'post';
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'entrades';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$id = isset($_GET['id']) ? $_GET['id'] : '';
 
-$db = getDBConnection();
 
 switch ($controller) {
     case 'user':
-        require 'controllers/UserController.php';
-        $controller = new UserController($db);
+/*        require 'controllers/UserController.php';
+        $controller = new UserController();*/
         break;
     case 'comment':
-        require 'controllers/CommentController.php';
-        $controller = new CommentController($db);
+/*        require 'controllers/CommentController.php';
+        $controller = new CommentController();*/
         break;
-    case 'post':
+    case 'entrada':
+        require 'controller/EntradaController.php';
+        $controller = new EntradaController();
+        break;
+    case 'entrades':
     default:
-        require 'controllers/PostController.php';
-        $controller = new PostController($db);
+        require 'controller/EntradesController.php';
+        $controller = new EntradesController();
         break;
 }
 
-$controller->$action();*/
+$controller->{$action}($id);
 
 
+/*
 
 $controller = 'post';
 $action = 'index';
@@ -42,5 +48,5 @@ switch ($controller) {
         break;
 }
 
-$controller->$action();
+$controller->$action();*/
 ?>
