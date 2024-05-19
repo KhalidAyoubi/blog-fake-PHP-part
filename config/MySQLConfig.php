@@ -1,22 +1,28 @@
 <?php
-define('DB_SERVER', 'basesdedades');
-define('DB_USERNAME', 'khalid');
-define('DB_PASSWORD', 'secret');
-define('DB_NAME', 'blog');
 
-class MySQLConfig
-{
-    private static $connection;
+if (!defined('DB_SERVER')) {
+    define('DB_SERVER', 'basesdedades');
+}
+if (!defined('DB_USERNAME')) {
+    define('DB_USERNAME', 'khalid');
+}
+if (!defined('DB_PASSWORD')) {
+    define('DB_PASSWORD', 'secret');
+}
+if (!defined('DB_NAME')) {
+    define('DB_NAME', 'blog');
+}
 
-    private function __construct() {}
-
-    public static function getDBConnection() {
-        if (!isset(self::$connection)) {
-            self::$connection = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-            if (self::$connection->connect_error) {
-                throw new Exception("Connection failed: " . self::$connection->connect_error);
+if (!class_exists('MySQLConfig')) {
+    class MySQLConfig
+    {
+        public static function getDBConnection() {
+            $connection = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            if ($connection->connect_error) {
+                die("Connection failed: " . $connection->connect_error);
             }
+            return $connection;
         }
-        return self::$connection;
     }
 }
+?>

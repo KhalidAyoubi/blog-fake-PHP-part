@@ -19,7 +19,7 @@ class UsuariController
             $password = $_POST['password'];
             $user = $this->usuariService->login($username, $password);
             if ($user) {
-                $_SESSION['usuari'] = $username;
+                $_SESSION['usuari'] = $user->getUsername();
                 header("Location: index.php");
             } else {
                 echo "Credenciales incorrectas. Verifique todos los datos antes de intentralo otra vez. <a href='index.php?controller=usuari&action=login'>Volver a intentarlo</a>";

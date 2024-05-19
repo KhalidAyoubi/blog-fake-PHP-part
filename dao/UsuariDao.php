@@ -17,8 +17,6 @@ class UsuariDao
 
     public function register($username, $password, $email, $nom, $cognoms) {
         $stmt = $this->db->prepare("INSERT INTO usuari (username, password, email, nom, cognoms) VALUES (?, ?, ?, ?, ?)");
-        //$hashed_password = password_hash($password, PASSWORD_DEFAULT); //Encriptamos la contraseña
-        //$stmt->bind_param("sssss", $username, $hashed_password, $email, $nom, $cognoms);
         $stmt->bind_param("sssss", $username, $password, $email, $nom, $cognoms);
         return $stmt->execute();
     }

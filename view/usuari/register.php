@@ -1,3 +1,7 @@
+<?php
+    @include ("view/header.php");
+?>
+
 <h1>Registro</h1>
 <form action="index.php?controller=usuari&action=register" method="POST">
     <label for="username">Usuario:</label>
