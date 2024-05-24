@@ -33,7 +33,6 @@ class EntradaController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $idcomentari = (int) $_POST['idcomentari'];
             $entrada_id = (int) $_POST['entrada_id'];
-            //$username = $_POST['usuari'];
             $usuari_username = $_SESSION['usuari'];
 
             $comentari = $this->comentariService->findComentariById($idcomentari, $entrada_id, $usuari_username);
